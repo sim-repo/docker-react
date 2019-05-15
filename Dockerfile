@@ -1,8 +1,10 @@
 FROM node:alpine as  builder
+RUN mkdir -p '/app/build'
 WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
+RUN echo "$PWD"
 CMD npm run build
 
 FROM nginx
