@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sim-repo/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run sim-repo/docker-react npm test -- --coverage
