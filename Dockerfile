@@ -1,12 +1,11 @@
 FROM node:alpine as  builder
-RUN mkdir -p '/app/build'
-WORKDIR /app
+WORKDIR '/home/node/app'
 COPY package.json .
 RUN npm install
 COPY . .
 RUN echo "$PWD"
-CMD npm run build
+CMD ["npm", "run", "build"]
 
 FROM nginx
 EXPOSE 80
-COPY --from=0 /app/build /usr/share/nginx/html
+COPY --from=0 /home/node/app/build /usr/share/nginx/html
